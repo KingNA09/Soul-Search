@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import Reveal from './Reveal'
 
 function CTASection() {
@@ -10,10 +11,10 @@ function CTASection() {
           Start today.
         </h2>
         <p>Two minutes now could tell you exactly where to focus this month.</p>
-        <a href="/assessment" className="btn-primary">
+        <Link to="/assessment" className="btn-primary">
           Take the assessment
           <span className="btn-arrow" aria-hidden="true">→</span>
-        </a>
+        </Link>
       </Reveal>
     </section>
   )

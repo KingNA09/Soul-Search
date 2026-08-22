@@ -1,0 +1,93 @@
+.hist-page {
+  min-height: 100vh;
+  padding: 64px 0 100px;
+}
+
+.hist-wrap {
+  max-width: 720px;
+}
+
+.hist-page h1 {
+  font-size: clamp(28px, 3.6vw, 40px);
+  font-weight: 600;
+  margin: 14px 0 16px;
+}
+
+.hist-loading {
+  color: var(--text-faint);
+  font-size: 13px;
+}
+
+.hist-chart {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 20px;
+  margin: 32px 0 16px;
+}
+
+.hist-chart svg {
+  width: 100%;
+  height: 180px;
+  display: block;
+}
+
+.hist-legend {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.hist-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  color: var(--text-soft);
+}
+
+.hist-legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.hist-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 32px;
+}
+
+.hist-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: var(--bg-alt);
+  border: 1px solid var(--line-soft);
+  border-radius: 10px;
+  padding: 14px 18px;
+  flex-wrap: wrap;
+}
+
+.hist-row-date {
+  font-size: 12.5px;
+  color: var(--text-faint);
+  min-width: 90px;
+}
+
+.hist-row-scores {
+  display: flex;
+  gap: 12px;
+}
+
+.hist-row-score {
+  font-size: 12px;
+  color: var(--text-soft);
+}
+
+.hist-retake {
+  display: inline-flex;
+}

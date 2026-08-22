@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 function Hero() {
   return (
     <header className="wrap hero">
@@ -16,10 +18,10 @@ function Hero() {
         </p>
 
         <div className="hero-actions">
-          <a href="/assessment" className="btn-primary">
+          <Link to="/assessment" className="btn-primary">
             Take the assessment
             <span className="btn-arrow" aria-hidden="true">→</span>
-          </a>
+          </Link>
           <a href="#how" className="btn-ghost">
             See how it works
           </a>

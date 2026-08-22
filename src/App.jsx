@@ -11,6 +11,8 @@ import Triad from './components/Triad'
 import CTASection from './components/CTASection'
 import Footer from './components/Footer'
 import Login from './components/Login'
+import Assessment from './components/Assessment'
+import History from './components/History'
 
 function LandingPage() {
   return (
@@ -57,6 +59,14 @@ function App() {
         <Route
           path="/login"
           element={session ? <Navigate to="/" replace /> : <LoginPage />}
+        />
+        <Route
+          path="/assessment"
+          element={session ? <Assessment /> : <Navigate to="/login" replace />}
+        />
+        <Route
+         path ="/history"
+          element={session ? <History /> : <Navigate to="/login" replace />}
         />
       </Routes>
     </BrowserRouter>
