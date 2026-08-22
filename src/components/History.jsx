@@ -14,29 +14,51 @@ export default function History() {
   const [assessments, setAssessments] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
+  const [confirmingId, setConfirmingId] = useState(null)
+  const [deletingId, setDeletingId] = useState(null)
 
   useEffect(() => {
-    const load = async () => {
-      try {
-        const { data: { user } } = await supabase.auth.getUser()
-        if (!user) throw new Error('Not logged in.')
-
-        const { data, error: fetchError } = await supabase
-          .from('assessments')
-          .select('*')
-          .eq('user_id', user.id)
-          .order('created_at', { ascending: true })
-
-        if (fetchError) throw fetchError
-        setAssessments(data || [])
-      } catch (err) {
-        setError(err.message || 'Could not load your history.')
-      } finally {
-        setLoading(false)
-      }
-    }
-    load()
+    loadAssessments()
   }, [])
+
+  const loadAssessments = async () => {
+    setLoading(true)
+    try {
+      const { data: { user } } = await supabase.auth.getUser()
+      if (!user) throw new Error('Not logged in.')
+
+      const { data, error: fetchError } = await supabase
+        .from('assessments')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: true })
+
+      if (fetchError) throw fetchError
+      setAssessments(data || [])
+    } catch (err) {
+      setError(err.message || 'Could not load your history.')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleDelete = async (id) => {
+    setDeletingId(id)
+    try {
+      const { error: deleteError } = await supabase
+        .from('assessments')
+        .delete()
+        .eq('id', id)
+
+      if (deleteError) throw deleteError
+      setAssessments((prev) => prev.filter((a) => a.id !== id))
+    } catch (err) {
+      setError(err.message || 'Could not delete this check-in.')
+    } finally {
+      setDeletingId(null)
+      setConfirmingId(null)
+    }
+  }
 
   if (loading) {
     return (
@@ -48,7 +70,7 @@ export default function History() {
     )
   }
 
-  if (error) {
+  if (error && assessments.length === 0) {
     return (
       <div className="hist-page">
         <div className="wrap hist-wrap">
@@ -100,6 +122,8 @@ export default function History() {
           ))}
         </div>
 
+        {error && <p className="assess-error">{error}</p>}
+
         <div className="hist-list">
           {[...assessments].reverse().map((a) => (
             <div key={a.id} className="hist-row">
@@ -119,6 +143,38 @@ export default function History() {
                     {AREA_META[area].label[0]}: {Number(a[`${area}_score`]).toFixed(1)}
                   </span>
                 ))}
+              </div>
+
+              <div className="hist-row-actions">
+                {confirmingId === a.id ? (
+                  <>
+                    <span className="hist-confirm-text">Delete this check-in?</span>
+                    <button
+                      type="button"
+                      className="hist-delete-confirm"
+                      onClick={() => handleDelete(a.id)}
+                      disabled={deletingId === a.id}
+                    >
+                      {deletingId === a.id ? 'Deleting…' : 'Yes, delete'}
+                    </button>
+                    <button
+                      type="button"
+                      className="hist-delete-cancel"
+                      onClick={() => setConfirmingId(null)}
+                    >
+                      Cancel
+                    </button>
+                  </>
+                ) : (
+                  <button
+                    type="button"
+                    className="hist-delete-btn"
+                    onClick={() => setConfirmingId(a.id)}
+                    aria-label="Delete this check-in"
+                  >
+                    Delete
+                  </button>
+                )}
               </div>
             </div>
           ))}

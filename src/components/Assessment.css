@@ -119,3 +119,31 @@
   gap: 20px;
   flex-wrap: wrap;
 }
+.assess-score-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+
+.assess-delta {
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 100px;
+}
+
+.assess-delta-up {
+  color: #ff8a5b;
+  background: rgba(255, 138, 91, 0.12);
+}
+
+.assess-delta-down {
+  color: #7cffb2;
+  background: rgba(124, 255, 178, 0.12);
+}
+
+.assess-delta-flat {
+  color: var(--text-faint);
+  background: var(--bg-alt);
+}

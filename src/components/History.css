@@ -91,3 +91,55 @@
 .hist-retake {
   display: inline-flex;
 }
+.hist-row-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+}
+
+.hist-delete-btn {
+  background: none;
+  border: 1px solid var(--line);
+  color: var(--text-faint);
+  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.hist-delete-btn:hover {
+  border-color: #ff6b6b;
+  color: #ff6b6b;
+}
+
+.hist-confirm-text {
+  font-size: 12px;
+  color: var(--text-soft);
+}
+
+.hist-delete-confirm {
+  background: #ff6b6b;
+  border: none;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.hist-delete-confirm:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.hist-delete-cancel {
+  background: none;
+  border: none;
+  color: var(--text-faint);
+  font-size: 12px;
+  cursor: pointer;
+  text-decoration: underline;
+}

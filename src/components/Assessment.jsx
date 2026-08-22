@@ -9,8 +9,8 @@ const STEP_RESULTS = 'results'
 
 export default function Assessment() {
   const navigate = useNavigate()
-  const [step, setStep] = useState(STEP_INTRO) // 'intro' | 0 | 1 | 2 (area index) | 'results'
-  const [answers, setAnswers] = useState({}) // { mental: [..], physical: [..], emotional: [..] }
+  const [step, setStep] = useState(STEP_INTRO)
+  const [answers, setAnswers] = useState({})
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
   const [result, setResult] = useState(null)
@@ -56,6 +56,17 @@ export default function Assessment() {
       const { data: { user } } = await supabase.auth.getUser()
       if (!user) throw new Error('You need to be logged in to save results.')
 
+      // Fetch the most recent previous check-in BEFORE saving the new one
+      const { data: previous, error: prevError } = await supabase
+        .from('assessments')
+        .select('mental_score, physical_score, emotional_score, created_at')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false })
+        .limit(1)
+        .maybeSingle()
+
+      if (prevError) throw prevError
+
       const { error: insertError } = await supabase.from('assessments').insert({
         user_id: user.id,
         mental_score: scores.mental,
@@ -66,7 +77,14 @@ export default function Assessment() {
       })
       if (insertError) throw insertError
 
-      setResult({ scores, priorityArea })
+      const deltas = {}
+      if (previous) {
+        AREAS.forEach((area) => {
+          deltas[area] = scores[area] - Number(previous[`${area}_score`])
+        })
+      }
+
+      setResult({ scores, priorityArea, deltas: previous ? deltas : null })
       setStep(STEP_RESULTS)
       window.scrollTo({ top: 0, behavior: 'smooth' })
     } catch (err) {
@@ -102,13 +120,17 @@ export default function Assessment() {
           <span className="section-eyebrow mono">RESULTS</span>
           <h1>Your focus area right now</h1>
           <p className="assess-lead">
-            Based on your answers, here's how each area is looking.
+            {result.deltas
+              ? 'Based on your answers, here\'s how each area is looking compared to your last check-in.'
+              : 'Based on your answers, here\'s how each area is looking.'}
           </p>
 
           <div className="triad-grid assess-results-grid">
             {AREAS.map((area) => {
               const isPriority = area === result.priorityArea
               const pct = Math.round(((result.scores[area] - 1) / 4) * 100)
+              const delta = result.deltas ? result.deltas[area] : null
+
               return (
                 <div key={area} className={`tcard ${isPriority ? 'tcard-open' : ''}`}>
                   <div className="tcard-top">
@@ -118,12 +140,23 @@ export default function Assessment() {
                   <h3>{AREA_META[area].label}</h3>
                   <p>{AREA_META[area].blurb}</p>
                   <div className="assess-score-bar">
-                    <div
-                      className="assess-score-fill"
-                      style={{ width: `${pct}%` }}
-                    />
+                    <div className="assess-score-fill" style={{ width: `${pct}%` }} />
                   </div>
-                  <span className="assess-score-label mono">{pct}% strain</span>
+                  <div className="assess-score-row">
+                    <span className="assess-score-label mono">{pct}% strain</span>
+                    {delta !== null && Math.abs(delta) >= 0.05 && (
+                      <span
+                        className={`assess-delta mono ${
+                          delta > 0 ? 'assess-delta-up' : 'assess-delta-down'
+                        }`}
+                      >
+                        {delta > 0 ? '↑' : '↓'} {Math.abs(delta).toFixed(1)}
+                      </span>
+                    )}
+                    {delta !== null && Math.abs(delta) < 0.05 && (
+                      <span className="assess-delta mono assess-delta-flat">— steady</span>
+                    )}
+                  </div>
                 </div>
               )
             })}
@@ -142,7 +175,6 @@ export default function Assessment() {
     )
   }
 
-  // Question step for current area
   return (
     <div className="assess-page">
       <div className="wrap assess-wrap">
@@ -174,16 +206,8 @@ export default function Assessment() {
 
         {error && <p className="assess-error">{error}</p>}
 
-        <button
-          className="btn-primary"
-          onClick={goNext}
-          disabled={!allAnswered || saving}
-        >
-          {saving
-            ? 'Saving…'
-            : step === AREAS.length - 1
-            ? 'See my results'
-            : 'Next'}{' '}
+        <button className="btn-primary" onClick={goNext} disabled={!allAnswered || saving}>
+          {saving ? 'Saving…' : step === AREAS.length - 1 ? 'See my results' : 'Next'}{' '}
           <span className="btn-arrow">→</span>
         </button>
 
