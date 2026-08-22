@@ -14,6 +14,7 @@ import Login from './components/Login'
 import Assessment from './components/Assessment'
 import History from './components/History'
 import Resources from './components/Resources'
+import AccountSettings from './components/AccountSettings'
 
 function LandingPage() {
   return (
@@ -72,6 +73,10 @@ function App() {
         <Route
         path='/resources/:area'
           element={session ? <Resources /> : <Navigate to="/login" replace />}
+        />
+        <Route
+        path='/account'
+          element={session ? <AccountSettings /> : <Navigate to="/login" replace />}
         />
       </Routes>
     </BrowserRouter>

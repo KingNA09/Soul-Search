@@ -62,6 +62,8 @@ function Navbar() {
 
           {session ? (
             <>
+              <Link to="/history">History</Link>
+              <Link to = "/account">Account</Link>
               <span className="nav-user">Logged in as {fullName || session.user.email}</span>
               <button type="button" className="nav-cta" onClick={handleLogout}>
                 Log out
@@ -95,7 +97,10 @@ function Navbar() {
         ))}
         {session ? (
           <>
-            <span className="nav-user">Logged in as {fullName|| session.user.email}</span>
+            <Link to="/history" onClick={() => setMenuOpen(false)}>
+              History
+            </Link>
+            <span className="nav-user">Logged in as {fullName || session.user.email}</span>
             <button type="button" className="nav-cta" onClick={handleLogout}>
               Log out
             </button>

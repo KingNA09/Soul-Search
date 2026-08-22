@@ -108,7 +108,7 @@ export default function Assessment() {
           <div className="triad-grid assess-results-grid">
             {AREAS.map((area) => {
               const isPriority = area === result.priorityArea
-              const pct = Math.round((result.scores[area] / 5) * 100)
+              const pct = Math.round(((result.scores[area] - 1) / 4) * 100)
               return (
                 <div key={area} className={`tcard ${isPriority ? 'tcard-open' : ''}`}>
                   <div className="tcard-top">
