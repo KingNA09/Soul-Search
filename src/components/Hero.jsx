@@ -4,7 +4,7 @@ function Hero() {
   return (
     <header className="wrap hero">
       <div className="hero-copy">
-        <span className="eyebrow">Your monthly check-in</span>
+        <span className="eyebrow">Your regular check in</span>
         <h1>
           One assessment.
           <br />

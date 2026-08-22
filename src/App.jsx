@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom'
 import { supabase } from './lib/supabase'
 import './App.css'
-
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import HowItWorks from './components/HowItWorks'
@@ -15,6 +14,7 @@ import Assessment from './components/Assessment'
 import History from './components/History'
 import Resources from './components/Resources'
 import AccountSettings from './components/AccountSettings'
+import ResetPassword from './components/ResetPassword'
 
 function LandingPage() {
   return (
@@ -78,6 +78,7 @@ function App() {
         path='/account'
           element={session ? <AccountSettings /> : <Navigate to="/login" replace />}
         />
+        <Route path="/reset-password" element={<ResetPassword />} />
       </Routes>
     </BrowserRouter>
   )
