@@ -1,0 +1,77 @@
+.res-page {
+  min-height: 100vh;
+  padding: 64px 0 100px;
+}
+
+.res-wrap {
+  max-width: 680px;
+}
+
+.res-page h1 {
+  font-size: clamp(28px, 3.6vw, 40px);
+  font-weight: 600;
+  margin: 14px 0 16px;
+}
+
+.res-section {
+  margin: 36px 0;
+}
+
+.res-section-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 18px;
+}
+
+.res-tips {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.res-tip {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 14px 16px;
+  font-size: 14px;
+  color: var(--text-soft);
+  line-height: 1.55;
+}
+
+.res-exercises {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.res-exercise {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 18px 20px;
+}
+
+.res-exercise h3 {
+  font-size: 15.5px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.res-exercise p {
+  font-size: 13.5px;
+  color: var(--text-soft);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.res-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 40px;
+}

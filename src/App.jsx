@@ -13,6 +13,7 @@ import Footer from './components/Footer'
 import Login from './components/Login'
 import Assessment from './components/Assessment'
 import History from './components/History'
+import Resources from './components/Resources'
 
 function LandingPage() {
   return (
@@ -67,6 +68,10 @@ function App() {
         <Route
          path ="/history"
           element={session ? <History /> : <Navigate to="/login" replace />}
+        />
+        <Route
+        path='/resources/:area'
+          element={session ? <Resources /> : <Navigate to="/login" replace />}
         />
       </Routes>
     </BrowserRouter>

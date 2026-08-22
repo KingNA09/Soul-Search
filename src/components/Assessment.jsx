@@ -130,9 +130,9 @@ export default function Assessment() {
           </div>
 
           <div className="assess-results-actions">
-            <button className="btn-primary assess-done" onClick={() => navigate('/')}>
-              Back to home <span className="btn-arrow">→</span>
-            </button>
+            <Link to={`/resources/${result.priorityArea}`} className="btn-primary assess-done">
+              View your resources <span className="btn-arrow">→</span>
+            </Link>
             <Link to="/history" className="btn-ghost hist-retake">
               View your history →
             </Link>
