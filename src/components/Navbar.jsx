@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { supabase } from '../lib/supabase'
 
 const LINKS = [
   { href: '#how', label: 'How it works' },
@@ -9,6 +11,16 @@ const LINKS = [
 function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [session, setSession] = useState(null)
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => setSession(session))
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (_event, session) => setSession(session)
+    )
+    return () => subscription.unsubscribe()
+  }, [])
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12)
@@ -17,7 +29,6 @@ function Navbar() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  // Close the mobile menu automatically if the viewport grows past mobile size
   useEffect(() => {
     const onResize = () => {
       if (window.innerWidth > 780) setMenuOpen(false)
@@ -26,13 +37,21 @@ function Navbar() {
     return () => window.removeEventListener('resize', onResize)
   }, [])
 
+  const handleLogout = async () => {
+    await supabase.auth.signOut()
+    setMenuOpen(false)
+    navigate('/')
+  }
+
+  const fullName = session?.user?.user_metadata?.full_name
+
   return (
     <nav className={`nav ${scrolled ? 'nav-scrolled' : ''}`}>
       <div className="wrap nav-inner">
-        <a href="/" className="logo">
+        <Link to="/" className="logo">
           <span className="logo-mark" aria-hidden="true" />
           Soul Search
-        </a>
+        </Link>
 
         <div className="nav-links">
           {LINKS.map((link) => (
@@ -40,9 +59,19 @@ function Navbar() {
               {link.label}
             </a>
           ))}
-          <a href="/login" className="nav-cta">
-            Log in
-          </a>
+
+          {session ? (
+            <>
+              <span className="nav-user">Logged in as {fullName || session.user.email}</span>
+              <button type="button" className="nav-cta" onClick={handleLogout}>
+                Log out
+              </button>
+            </>
+          ) : (
+            <Link to="/login" className="nav-cta">
+              Log in
+            </Link>
+          )}
         </div>
 
         <button
@@ -64,9 +93,18 @@ function Navbar() {
             {link.label}
           </a>
         ))}
-        <a href="/login" className="nav-cta" onClick={() => setMenuOpen(false)}>
-          Log in
-        </a>
+        {session ? (
+          <>
+            <span className="nav-user">Logged in as {fullName|| session.user.email}</span>
+            <button type="button" className="nav-cta" onClick={handleLogout}>
+              Log out
+            </button>
+          </>
+        ) : (
+          <Link to="/login" className="nav-cta" onClick={() => setMenuOpen(false)}>
+            Log in
+          </Link>
+        )}
       </div>
     </nav>
   )

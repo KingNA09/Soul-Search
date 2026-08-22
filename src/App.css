@@ -90,7 +90,14 @@ button{ font-family: inherit; }
   transition: background 0.15s ease, transform 0.15s ease;
 }
 .nav-cta:hover{ background: var(--royal-bright); transform: translateY(-1px); }
- 
+
+.nav-user {
+  font-size: 14px;
+  color: var(--text-soft);
+  font-weight: 500;
+  margin-right: 4px;
+}
+
 .nav-toggle{
   display: none; flex-direction: column; justify-content: center; gap: 5px;
   width: 34px; height: 34px; background: none; border: none; cursor: pointer;

@@ -1,0 +1,142 @@
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0a0a12;
+  padding: 24px;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 400px;
+  background: #12121e;
+  border: 1px solid #23233a;
+  border-radius: 16px;
+  padding: 40px 32px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+}
+
+.auth-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.auth-logo {
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  background: #5b6cff;
+  display: inline-block;
+}
+
+.auth-title {
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.auth-heading {
+  color: #fff;
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 0 8px;
+}
+
+.auth-subheading {
+  color: #9797ab;
+  font-size: 14px;
+  margin: 0 0 28px;
+  line-height: 1.5;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.auth-label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: #b4b4c6;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.auth-input {
+  background: #191928;
+  border: 1px solid #2b2b45;
+  border-radius: 10px;
+  padding: 12px 14px;
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.auth-input:focus {
+  border-color: #5b6cff;
+}
+
+.auth-input::placeholder {
+  color: #55556e;
+}
+
+.auth-error {
+  color: #ff6b6b;
+  font-size: 13px;
+  margin: -6px 0 0;
+}
+
+.auth-message {
+  color: #6bc27a;
+  font-size: 13px;
+  margin: -6px 0 0;
+}
+
+.auth-submit {
+  margin-top: 6px;
+  background: #5b6cff;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, opacity 0.15s ease;
+}
+
+.auth-submit:hover:not(:disabled) {
+  background: #4a5aee;
+}
+
+.auth-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.auth-switch {
+  margin: 24px 0 0;
+  text-align: center;
+  color: #9797ab;
+  font-size: 13px;
+}
+
+.auth-link {
+  background: none;
+  border: none;
+  color: #7c8bff;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  padding: 0;
+}
+
+.auth-link:hover {
+  text-decoration: underline;
+}
