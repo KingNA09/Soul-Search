@@ -11,10 +11,7 @@ function Hero() {
           One clear focus.
         </h1>
         <p className="lead">
-          Mental, physical, and emotional health rarely fall apart one at a time — but
-          most of us only know how to work on one. Soul Search runs a short assessment,
-          tells you which area needs you most right now, and gives you a clear path to
-          act on it.
+          A 2-minute check-in that tells you exactly what needs your attention.
         </p>
 
         <div className="hero-actions">
@@ -22,10 +19,11 @@ function Hero() {
             Take the assessment
             <span className="btn-arrow" aria-hidden="true">→</span>
           </Link>
-          <a href="#how" className="btn-ghost">
-            See how it works
-          </a>
         </div>
+
+        <a href="#how" className="hero-subtle-link">
+          See how it works
+        </a>
 
         <div className="hero-chips">
           <span className="chip">2 minutes</span>
