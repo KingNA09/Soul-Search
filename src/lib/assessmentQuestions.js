@@ -14,7 +14,7 @@ export const AREA_META = {
   emotional: {
     label: 'Emotional',
     tag: '03 / EMOTIONAL',
-    blurb: 'Mood and emotional regulation.',
+    blurb: 'Mood, connection, and emotional wellbeing.',
   },
 }
 
@@ -28,24 +28,83 @@ export const SCALE = [
 
 export const QUESTIONS = {
   mental: [
-    "I've felt mentally foggy or unfocused.",
-    "I catch myself overthinking or replaying conversations.",
-    "Small tasks have felt harder to start than usual.",
-    "My mind feels crowded even when I'm not busy.",
-    "I've had trouble concentrating on one thing at a time.",
+    {
+      text: "I've felt mentally foggy or unfocused.",
+      reverse: false,
+    },
+    {
+      text: 'I catch myself overthinking or replaying conversations.',
+      reverse: false,
+    },
+    {
+      text: 'Small tasks have felt harder to start than usual.',
+      reverse: false,
+    },
+    {
+      text: 'My mind feels crowded even when I am not busy.',
+      reverse: false,
+    },
+    {
+      text: "I've had trouble concentrating on one thing at a time.",
+      reverse: false,
+    },
+    {
+      text: 'I have given myself enough time to properly switch off and reset.',
+      reverse: true,
+    },
   ],
+
   physical: [
-    "I haven't been getting enough restful sleep.",
-    "I've skipped moving my body (walking, stretching, exercise).",
-    "My energy dips noticeably during the day.",
-    "I feel physically tense or achy without explanation.",
-    "My eating or hydration routine has been inconsistent.",
+    {
+      text: "I haven't been getting enough restful sleep.",
+      reverse: false,
+    },
+    {
+      text: "I've skipped moving my body when I could have been active.",
+      reverse: false,
+    },
+    {
+      text: 'My energy dips noticeably during the day.',
+      reverse: false,
+    },
+    {
+      text: 'I feel physically tense or achy without an obvious reason.',
+      reverse: false,
+    },
+    {
+      text: 'My eating or hydration routine has been inconsistent.',
+      reverse: false,
+    },
+    {
+      text: 'I have made time for movement or physical activity this week.',
+      reverse: true,
+    },
   ],
+
   emotional: [
-    "My mood has felt unpredictable rather than steady.",
-    "I've felt disconnected from people around me.",
-    "I've had moments of sadness or low mood I couldn't shake.",
-    "I've struggled to name what I'm feeling in the moment.",
-    "Stress has felt overwhelming rather than manageable.",
+    {
+      text: 'My mood has felt unpredictable rather than steady.',
+      reverse: false,
+    },
+    {
+      text: "I've felt disconnected from people around me.",
+      reverse: false,
+    },
+    {
+      text: "I've had moments of sadness or low mood that were difficult to shake.",
+      reverse: false,
+    },
+    {
+      text: "I've struggled to identify what I'm feeling in the moment.",
+      reverse: false,
+    },
+    {
+      text: 'Stress has felt overwhelming rather than manageable.',
+      reverse: false,
+    },
+    {
+      text: 'I have made time for something I genuinely enjoy this week.',
+      reverse: true,
+    },
   ],
 }
