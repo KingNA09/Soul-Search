@@ -1,6 +1,7 @@
 .assess-page {
   min-height: 100vh;
   padding: 64px 0 100px;
+  background: red !important;
 }
 
 .assess-wrap {
