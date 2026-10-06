@@ -1,12 +1,14 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
+
 import {
   AREAS,
   AREA_META,
   QUESTIONS,
   SCALE,
-} from '../lib/assessmentQuestions'
+} from './assessmentQuestions'
+
 import './Assessment.css'
 
 const STEP_INTRO = 'intro'
